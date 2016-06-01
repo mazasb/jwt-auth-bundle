@@ -1,0 +1,40 @@
+{
+    "name": "mazasb/jwt-auth-bundle",
+    "type": "symfony-bundle",
+    "description": "Symfony JwtAuthBundle",
+    "keywords": [],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Balazs Mazas",
+            "email": "mazasb@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.5.9",
+        "symfony/http-foundation": "~2.8|~3.0",
+        "symfony/dependency-injection": "~2.8|~3.0",
+        "symfony/http-kernel": "~2.8|~3.0",
+        "symfony/config": "~2.8|~3.0",
+        "tymon/jwt-auth": "dev-develop"
+    },
+    "require-dev": {
+        "symfony/phpunit-bridge": "^3.0",
+        "phpunit/phpunit": "^5.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "Acme\\JwtAuthBundle\\": ""
+        },
+        "exclude-from-classmap": [
+            "/Tests/"
+        ]
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        }
+    }
+}
