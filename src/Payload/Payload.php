@@ -5,9 +5,9 @@
  * Time: 8:32
  */
 
-namespace Acme\JwtAuthBundle\Payload;
+namespace Acme\JwtAuthBundle;
 
-use Acme\JwtAuthBundle\Payload\Claim\Collection;
+use Acme\JwtAuthBundle\Claim\Collection;
 
 class Payload
 {
@@ -27,7 +27,7 @@ class Payload
      */
     public function __construct(Collection $claims, array $requiredClaims = [])
     {
-        $this->claims = $claims;
+        $this->claims = clone $claims;
         $this->requiredClaims = $requiredClaims;
 
         $this->checkRequiredClaims();

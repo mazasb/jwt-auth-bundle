@@ -5,7 +5,7 @@
  * Time: 9:57
  */
 
-namespace Acme\JwtAuthBundle\Payload\Claim;
+namespace Acme\JwtAuthBundle\Claim;
 
 trait DateTimeCreatorTrait
 {

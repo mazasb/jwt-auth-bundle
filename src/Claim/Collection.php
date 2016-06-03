@@ -5,7 +5,7 @@
  * Time: 8:26
  */
 
-namespace Acme\JwtAuthBundle\Payload\Claim;
+namespace Acme\JwtAuthBundle\Claim;
 
 use Doctrine\Common\Collections\ArrayCollection;
 
@@ -14,7 +14,7 @@ class Collection extends ArrayCollection
     /**
      * @inheritDoc
      */
-    public function __construct(array $claims)
+    public function __construct(array $claims = [])
     {
         foreach ($claims as $claim)
         {

@@ -5,7 +5,7 @@
  * Time: 10:33
  */
 
-namespace Acme\JwtAuthBundle\Payload\Claim;
+namespace Acme\JwtAuthBundle\Claim;
 
 class Factory
 {

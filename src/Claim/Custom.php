@@ -5,7 +5,7 @@
  * Time: 10:41
  */
 
-namespace Acme\JwtAuthBundle\Payload\Claim;
+namespace Acme\JwtAuthBundle\Claim;
 
 class Custom extends Claim
 {

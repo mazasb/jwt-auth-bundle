@@ -5,7 +5,7 @@
  * Time: 9:50
  */
 
-namespace Acme\JwtAuthBundle\Payload\Claim;
+namespace Acme\JwtAuthBundle\Claim;
 
 use Acme\JwtAuthBundle\Util\DateHelper;
 

@@ -5,7 +5,7 @@
  * Time: 8:26
  */
 
-namespace Acme\JwtAuthBundle\Payload\Claim;
+namespace Acme\JwtAuthBundle\Claim;
 
 abstract class Claim
 {
