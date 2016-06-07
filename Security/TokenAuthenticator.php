@@ -41,11 +41,7 @@ class TokenAuthenticator extends AbstractGuardAuthenticator
      */
     public function getCredentials(Request $request)
     {
-        try
-        {
-            $token = $this->jwt->parseToken()->getToken();
-        }
-        catch (JWTException $e)
+        if (!$token = $this->jwt->getToken())
         {
             return null;
         }
