@@ -1,0 +1,7 @@
+secure_resource:
+    path: /secure/resource
+    defaults:  { _controller: TokenAuthenticatorBundle:App:secured }
+
+unsecure_resource:
+    path: /unprotected_resource
+    defaults:  { _controller: TokenAuthenticatorBundle:App:unsecured }

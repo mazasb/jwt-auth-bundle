@@ -5,21 +5,63 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
-        <!--<parameter key="jwt_auth.blacklist.class"></parameter>-->
-        <!--<parameter key="jwt_auth.factory.class"></parameter>-->
+        <parameter key="jwt_auth.secret">abc</parameter>
+        <parameter key="jwt_auth.algo">abc</parameter>
     </parameters>
 
     <services>
-        <service id="jwt_auth.namshi.provider" class="Tymon\JWTAuth\Providers\JWT\Namshi">
-            <argument type="service" id="service_id" />
-            <argument>plain_value</argument>
-            <argument>%parameter_name%</argument>
+        <service id="jwt_auth.provider" class="Tymon\JWTAuth\Providers\JWT\Namshi">
+            <argument>%jwt_auth.secret%</argument>
+            <argument>%jwt_auth.algo%</argument>
+            <argument type="collection">%jwt_auth.keys%</argument>
+        </service>
+
+        <service id="jwt_auth.blacklist.storage" class="Acme\JwtAuthBundle\Security\Provider\Blacklist">
+        </service>
+
+        <service id="jwt_auth.blacklist" class="Tymon\JWTAuth\Blacklist">
+            <argument type="service" id="jwt_auth.blacklist.storage" />
+        </service>
+
+        <service id="jwt_auth.claim.factory" class="Tymon\JWTAuth\Claims\Factory">
+        </service>
+
+        <service id="jwt_auth.payload.validator" class="Tymon\JWTAuth\Validators\PayloadValidator">
+        </service>
+
+        <service id="jwt_auth.payload.factory" class="Tymon\JWTAuth\Factory">
+            <argument type="service" id="jwt_auth.claim.factory" />
+            <argument type="expression">service('request_stack').getMasterRequest()</argument>
+            <argument type="service" id="jwt_auth.payload.validator" />
         </service>
 
         <service id="jwt_auth.manager" class="Tymon\JWTAuth\Manager">
-            <argument type="service" id="service_id" />
-            <argument>plain_value</argument>
-            <argument>%parameter_name%</argument>
+            <argument type="service" id="jwt_auth.provider" />
+            <argument type="service" id="jwt_auth.blacklist" />
+            <argument type="service" id="jwt_auth.payload.factory" />
+        </service>
+
+        <service id="jwt_auth.parser.auth_header" class="Tymon\JWTAuth\Http\Parser\AuthHeaders">
+        </service>
+
+        <service id="jwt_auth.parser.query_string" class="Tymon\JWTAuth\Http\Parser\QueryString">
+        </service>
+
+        <service id="jwt_auth.parser" class="Tymon\JWTAuth\Http\Parser\Parser">
+            <argument type="expression">service('request_stack').getMasterRequest()</argument>
+            <argument type="collection">
+                <argument type="service" id="jwt_auth.parser.auth_header" />
+                <argument type="service" id="jwt_auth.parser.query_string" />
+            </argument>
+        </service>
+
+        <service id="jwt_auth.jwt" class="Tymon\JWTAuth\JWT">
+            <argument type="service" id="jwt_auth.manager" />
+            <argument type="service" id="jwt_auth.parser" />
+        </service>
+
+        <service id="jwt_auth.authenticator" class="Acme\JwtAuthBundle\Security\TokenAuthenticator">
+            <argument type="service" id="jwt_auth.jwt" />
         </service>
     </services>
 </container>
