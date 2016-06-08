@@ -11,7 +11,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Tymon\JWTAuth\Payload;
 
-interface ITokenUserProvider extends UserProviderInterface
+interface TokenUserProviderInterface extends UserProviderInterface
 {
     /**
      * @param Payload $payload

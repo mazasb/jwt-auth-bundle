@@ -7,14 +7,12 @@
 
 namespace Acme\JwtAuthBundle\Security;
 
-use Acme\JwtAuthBundle\Security\Provider\ITokenUserProvider;
+use Acme\JwtAuthBundle\Security\Provider\TokenUserProviderInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Authentication\Token\PreAuthenticatedToken;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
-use Symfony\Component\Security\Core\Exception\BadCredentialsException;
 use Symfony\Component\Security\Core\Exception\CustomUserMessageAuthenticationException;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationFailureHandlerInterface;
@@ -40,11 +38,9 @@ class JwtAuthenticator implements SimplePreAuthenticatorInterface, Authenticatio
 
     public function createToken(Request $request, $providerKey)
     {
-        if (!$token = $this->jwt->parseToken()->getToken()) {
-            throw new BadCredentialsException('No JWT token found');
-
-            // or to just skip api key authentication
-            // return null;
+        if (!$token = $this->jwt->parseToken()->getToken())
+        {
+            return null;
         }
 
         return new PreAuthenticatedToken(
@@ -56,12 +52,12 @@ class JwtAuthenticator implements SimplePreAuthenticatorInterface, Authenticatio
 
     public function authenticateToken(TokenInterface $token, UserProviderInterface $userProvider, $providerKey)
     {
-        if (!$userProvider instanceof ITokenUserProvider)
+        if (!$userProvider instanceof TokenUserProviderInterface)
         {
             throw new \InvalidArgumentException(
                 sprintf(
                     'The user provider must be an instance of %s (%s was given).',
-                    ITokenUserProvider::class, get_class($userProvider)
+                    TokenUserProviderInterface::class, get_class($userProvider)
                 )
             );
         }

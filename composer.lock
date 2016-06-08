@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "adc2441cdc5c2e84fd0175c16f4338e6",
-    "content-hash": "d427c7c167b8d2dc6dc26f6bdce49ad9",
+    "hash": "720e0af61e7db4067f51210adfcfd1da",
+    "content-hash": "019d95c30826cbdbf7e124c7a6daa543",
     "packages": [
         {
             "name": "doctrine/inflector",
@@ -178,12 +178,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/mazasb/jwt-auth.git",
-                "reference": "5b172805ade1bd47f0e2e9576278f87a309915fe"
+                "reference": "1d5a971bbbfd9b7a356a540128b43942068e4b4c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mazasb/jwt-auth/zipball/550f3c860d16955bd54264059234af921f719356",
-                "reference": "5b172805ade1bd47f0e2e9576278f87a309915fe",
+                "url": "https://api.github.com/repos/mazasb/jwt-auth/zipball/1d5a971bbbfd9b7a356a540128b43942068e4b4c",
+                "reference": "1d5a971bbbfd9b7a356a540128b43942068e4b4c",
                 "shasum": ""
             },
             "require": {
@@ -243,7 +243,7 @@
                 "source": "https://github.com/mazasb/jwt-auth/tree/master",
                 "issues": "https://github.com/mazasb/jwt-auth/issues"
             },
-            "time": "2016-06-06 09:10:18"
+            "time": "2016-06-07 11:11:04"
         },
         {
             "name": "namshi/jose",
@@ -1683,16 +1683,16 @@
         },
         {
             "name": "phpspec/prophecy",
-            "version": "dev-master",
+            "version": "v1.6.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpspec/prophecy.git",
-                "reference": "eec64c9457ef6dff4c9eface0914ec1bc0048ba0"
+                "reference": "58a8137754bc24b25740d4281399a4a3596058e0"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/phpspec/prophecy/zipball/58a8137754bc24b25740d4281399a4a3596058e0",
-                "reference": "eec64c9457ef6dff4c9eface0914ec1bc0048ba0",
+                "reference": "58a8137754bc24b25740d4281399a4a3596058e0",
                 "shasum": ""
             },
             "require": {
@@ -1741,7 +1741,7 @@
                 "spy",
                 "stub"
             ],
-            "time": "2016-06-06 10:57:18"
+            "time": "2016-06-07 08:13:47"
         },
         {
             "name": "phpunit/php-code-coverage",

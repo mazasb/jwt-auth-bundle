@@ -7,7 +7,7 @@
 
 namespace Acme\JwtAuthBundle\Security;
 
-use Acme\JwtAuthBundle\Security\Provider\ITokenUserProvider;
+use Acme\JwtAuthBundle\Security\Provider\TokenUserProviderInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
@@ -16,7 +16,6 @@ use Symfony\Component\Security\Core\Exception\CustomUserMessageAuthenticationExc
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Symfony\Component\Security\Guard\AbstractGuardAuthenticator;
-use Tymon\JWTAuth\Exceptions\JWTException;
 use Tymon\JWTAuth\Exceptions\TokenExpiredException;
 use Tymon\JWTAuth\Exceptions\TokenInvalidException;
 use Tymon\JWTAuth\JWT;
@@ -46,6 +45,24 @@ class TokenAuthenticator extends AbstractGuardAuthenticator
             return null;
         }
 
+        return $token;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getUser($token, UserProviderInterface $userProvider)
+    {
+        if (!$userProvider instanceof TokenUserProviderInterface)
+        {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    'The user provider must be an instance of %s (%s was given).',
+                    TokenUserProviderInterface::class, get_class($userProvider)
+                )
+            );
+        }
+
         try
         {
             $payload = $this->jwt->getPayload();
@@ -59,28 +76,7 @@ class TokenAuthenticator extends AbstractGuardAuthenticator
             throw new CustomUserMessageAuthenticationException('Token is invalid.');
         }
 
-        return [
-            'token' => $token,
-            'payload' => $payload
-        ];
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function getUser($credentials, UserProviderInterface $userProvider)
-    {
-        if (!$userProvider instanceof ITokenUserProvider)
-        {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    'The user provider must be an instance of %s (%s was given).',
-                    ITokenUserProvider::class, get_class($userProvider)
-                )
-            );
-        }
-
-        return $userProvider->getUserByPayload($credentials['payload']);
+        return $userProvider->getUserByPayload($payload);
     }
 
     /**
